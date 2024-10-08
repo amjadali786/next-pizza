@@ -14,7 +14,7 @@ export default async function handler(req: any, res: any) {
     await db.connect();
     const { email, password } = req.body;
     try {
-      let user = await Users.findOne({ email });
+      const user = await Users.findOne({ email });
 
       if (!user) {
         return res

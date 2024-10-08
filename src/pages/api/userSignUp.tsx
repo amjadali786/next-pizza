@@ -10,9 +10,9 @@ const jwtSecret = '$%ADDFSAFDSFAFA?.'
 export default async function handler(req:any, res: any) {
   let success = false;
   const salt = await bcrypt.genSalt(10);
-    console.log('salt ==', salt)
-  let securePass = await bcrypt.hash(req.body.password, salt);
-  console.log('securePass == ', securePass)
+    //console.log('salt ==', salt)
+  const securePass = await bcrypt.hash(req.body.password, salt);
+  //console.log('securePass == ', securePass)
 
   if (req.method === "POST") {
     await db.connect();

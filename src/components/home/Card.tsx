@@ -47,7 +47,7 @@ function Card(props:any) {
     // console.log(state);
     //
   };
-  let finalPrice = qty * parseInt(data.price[size]);
+  const finalPrice = qty * parseInt(data.price[size]);
 
   return (
     <div className="box">

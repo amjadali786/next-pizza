@@ -18,7 +18,7 @@ const reducer = (state: any, action: any) => {
         },
       ];
     case "UPDATE":
-      let arr = [...state];
+      const arr = [...state];
       arr.find((food, index) => {
         if (food.tempId === action.tempId) {
           arr[index] = {
@@ -31,12 +31,12 @@ const reducer = (state: any, action: any) => {
       return arr;
 
     case "REMOVE":
-      let newArr = [...state];
+      const newArr = [...state];
       newArr.splice(action.index, 1);
       return newArr;
 
     case "INCREMENT":
-      let incArr = [...state];
+      const incArr = [...state];
       incArr.find((food, index) => {
         if (food.tempId === action.tempId) {
           incArr[index] = {
@@ -49,7 +49,7 @@ const reducer = (state: any, action: any) => {
       return incArr;
 
     case "DECREMENT":
-      let decArr = [...state];
+      const decArr = [...state];
       decArr.find((food, index) => {
         if (food.tempId === action.tempId) {
           decArr[index] = {
@@ -62,7 +62,7 @@ const reducer = (state: any, action: any) => {
       return decArr;
 
     case "DROP":
-      let emptyArr: any = [];
+      const emptyArr: any = [];
       return emptyArr;
     default:
       console.log("Action type");

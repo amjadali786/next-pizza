@@ -7,7 +7,7 @@ export default async function handler(req:any, res: any) {
   if (req.method === "POST") {
     await db.connect();
     for (let i = 0; i < req.body.length; i++) {
-      let pizza = new PizzaData({
+      const pizza = new PizzaData({
         name: req.body[i].name,
         category: req.body[i].category,
         foodType: req.body[i].foodType,
@@ -22,7 +22,7 @@ export default async function handler(req:any, res: any) {
 
   if (req.method === "GET") {
     await db.connect();
-    let data = await PizzaData.find();
+    const data = await PizzaData.find();
     res.status(200).json({ data });
   }
   db.disconnect();

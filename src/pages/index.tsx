@@ -1,28 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import Image from "next/image";
 import localFont from "next/font/local";
 import CarouselComponent from "@/components/home/Carousel";
 import Card from "@/components/home/Card";
-//import cardData from "../store/cardData.json";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { baseUrl } from "@/utils/baseURL";
 import Head from "next/head";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
 export default function Home({data}:any) {
   const [typeFilter, setTypeFilter] = useState("");
-  let categories: any = new Set();
+  const categories: any = new Set();
   const foodData: any = [];
   const handleData = () => {
     data?.map((data: any) => {
@@ -30,7 +17,7 @@ export default function Home({data}:any) {
     });
   };
   handleData();
-  let categoryArray = [...categories];
+  const categoryArray = [...categories];
 
   return (
     <>

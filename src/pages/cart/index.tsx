@@ -14,7 +14,7 @@ function Cart() {
   const [success, setSuccess] = useState(false);
   const [fail, setFail] = useState(false);
   const handleCheckOut = async () => {
-    let userEmail = localStorage.getItem("userEmail");
+    const userEmail = localStorage.getItem("userEmail");
     console.log(localStorage.getItem("userEmail"));
     if (
       localStorage.getItem("userEmail") === null ||
@@ -45,7 +45,7 @@ function Cart() {
       });
     }
   };
-  let totalPrice = state.reduce((total: any, food: any) => total + food.price, 0);
+  const totalPrice = state.reduce((total: any, food: any) => total + food.price, 0);
   return (
     <>
       {success && (

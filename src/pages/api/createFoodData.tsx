@@ -7,7 +7,7 @@ export default async function handler(req: any, res: any) {
   if (req.method === "POST") {
     await db.connect();
     try {
-      let pizza = new PizzaData({
+      const pizza = new PizzaData({
         name: req.body.name,
         category: req.body.foodCategory,
         foodType: req.body.foodType,

@@ -10,7 +10,7 @@ export default async function handler(req: any, res: any) {
       if (req.body.email === undefined || req.body.email === null) {
         throw new Error();
       }
-      let data = req.body.order_data;
+      const data = req.body.order_data;
       await data.splice(0, 0, { order_date: req.body.order_date });
 
       let eId = await Orders.findOne({ email: req.body.email });

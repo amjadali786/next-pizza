@@ -14,7 +14,7 @@ function Orders() {
       },
       body: JSON.stringify({ email: localStorage.getItem("userEmail") }),
     }).then(async (res) => {
-      let response = await res.json();
+      const response = await res.json();
       setOrdersData(response?.order_data?.order_data);
     });
   };
