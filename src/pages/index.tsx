@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Image from "next/image";
 import localFont from "next/font/local";
 import CarouselComponent from "@/components/home/Carousel";

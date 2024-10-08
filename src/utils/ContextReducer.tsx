@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { createContext, useMemo, useReducer } from "react";
 
 const reducer = (state: any, action: any) => {

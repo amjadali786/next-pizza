@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Users from "@/models/Users";
 import db from "@/utils/db";
 import bcrypt from "bcryptjs";

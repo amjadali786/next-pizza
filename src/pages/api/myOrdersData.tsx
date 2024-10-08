@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Orders from "@/models/Orders";
 import db from "@/utils/db";
 

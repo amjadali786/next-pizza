@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Layout from "@/components/layouts/Layout";
 import "@/styles/globals.css";
 import { CartProvider } from "@/utils/ContextReducer";

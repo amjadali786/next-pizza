@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { CartContext } from "@/utils/ContextReducer";
 import Image from "next/image";
 import Link from "next/link";

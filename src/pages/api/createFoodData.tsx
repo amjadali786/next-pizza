@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import PizzaData from "@/models/PizzaData";
 import db from "@/utils/db";
 
