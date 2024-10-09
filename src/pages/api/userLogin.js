@@ -1,20 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import Users from "@/models/Users";
 import db from "@/utils/db";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-// const jwtSecret = process.env.JWT_SECRET;
-const jwtSecret = '$%ADDFSAFDSFAFA?.'
-export default async function handler(req: any, res: any) {
+const jwtSecret = process.env.JWT_SECRET;
+export default async function handler(req, res) {
   let success = false;
 
   if (req.method === "POST") {
     await db.connect();
     const { email, password } = req.body;
     try {
-      const user = await Users.findOne({ email });
+      let user = await Users.findOne({ email });
 
       if (!user) {
         return res
@@ -39,7 +36,7 @@ export default async function handler(req: any, res: any) {
       const isAdmin = await user.isAdmin;
       success = true;
       res.json({ success: success, authToken: authToken, isAdmin: isAdmin });
-    } catch (error: any) {
+    } catch (error) {
       console.log(error.message);
       res.send("Server Error");
     }

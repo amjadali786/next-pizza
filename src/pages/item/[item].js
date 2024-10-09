@@ -1,7 +1,7 @@
+import { baseUrl } from "@/utils/baseUrl";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { baseUrl } from "@/utils/baseURL";
 
 function Item({ data }) {
   console.log();
@@ -61,7 +61,6 @@ export async function getServerSideProps(context) {
     body: JSON.stringify({ item: item }),
   });
   const data = await res.json();
-  console.log('call == ',data)
   // Pass data to the page via props
   return { props: { data: data.data } };
 }

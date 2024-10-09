@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import PizzaData from "@/models/PizzaData";
 import db from "@/utils/db";
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req, res) {
   if (req.method === "POST") {
     await db.connect();
     try {
-      const pizza = new PizzaData({
+      let pizza = new PizzaData({
         name: req.body.name,
         category: req.body.foodCategory,
         foodType: req.body.foodType,

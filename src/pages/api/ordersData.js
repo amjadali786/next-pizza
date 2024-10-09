@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import Orders from "@/models/Orders";
 import db from "@/utils/db";
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req, res) {
   if (req.method === "POST") {
     await db.connect();
     try {
       if (req.body.email === undefined || req.body.email === null) {
         throw new Error();
       }
-      const data = req.body.order_data;
+      let data = req.body.order_data;
       await data.splice(0, 0, { order_date: req.body.order_date });
 
       let eId = await Orders.findOne({ email: req.body.email });
@@ -22,7 +20,7 @@ export default async function handler(req: any, res: any) {
           }).then(() => {
             res.json({ success: true });
           });
-        } catch (error: any) {
+        } catch (error) {
           res.send("Server error: ", error.message);
         }
       } else {
@@ -33,7 +31,7 @@ export default async function handler(req: any, res: any) {
           ).then(() => {
             res.json({ success: true });
           });
-        } catch (error: any) {
+        } catch (error) {
           res.status(400).send("Server error: ", error.message);
         }
       }

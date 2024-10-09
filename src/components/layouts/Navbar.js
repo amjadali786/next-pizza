@@ -6,7 +6,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 function Navbar() {
   const [mounted, setMounted] = useState(false);
-  const { state }: any = useContext(CartContext);
+  const { state } = useContext(CartContext);
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -50,7 +50,7 @@ function Navbar() {
           </Link>
           {localStorage.getItem("token") ? (
             <>
-              {JSON.parse(localStorage.getItem("isAdmin") || '{}') === true ? (
+              {JSON.parse(localStorage.getItem("isAdmin")) === true ? (
                 <Link
                   href={"/admin"}
                   className="text-white mr-5 cursor-pointer hover:text-gray-200 flex items-center"
@@ -62,7 +62,7 @@ function Navbar() {
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="currentColor"
-                    className="w-6 h-6"
+                    class="w-6 h-6"
                   >
                     <path
                       stroke-linecap="round"
@@ -187,7 +187,7 @@ function Navbar() {
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            className="w-5 h-5"
+            class="w-5 h-5"
           >
             <path
               stroke-linecap="round"

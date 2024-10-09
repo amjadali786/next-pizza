@@ -8,10 +8,9 @@ function CarouselComponent() {
   return (
     <Carousel
       autoPlay
-      //navButtonsAlwaysVisible
+      navButtonsAlwaysVisible
       infiniteLoop
       showStatus={false}
-      axis="horizontal"
       emulateTouch
       showThumbs={false}
     >

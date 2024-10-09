@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -8,7 +6,7 @@ function Login() {
   const router = useRouter();
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const response = await fetch("api/userLogin", {
@@ -35,11 +33,9 @@ function Login() {
     }
     //logic for login
   };
-
-  const handleChange = (e: any) => {
-    setCredentials({...credentials, [e.target.name]:e.target.value})
-  }
-
+  const handleChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
   return (
     <div
       style={{
@@ -73,11 +69,11 @@ function Login() {
             />
           </div>
           <div className="mb-4">
-            <label 
-                htmlFor="password"
-                className="block text-gray-700  dark:text-gray-300 text-sm font-bold mb-2"
+            <label
+              htmlFor="password"
+              className="block text-gray-700  dark:text-gray-300 text-sm font-bold mb-2"
             >
-                Password
+              Password
             </label>
             <input
               placeholder="*******"

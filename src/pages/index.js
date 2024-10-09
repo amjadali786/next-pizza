@@ -1,38 +1,43 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import localFont from "next/font/local";
-import CarouselComponent from "@/components/home/Carousel";
 import Card from "@/components/home/Card";
-import { useState } from "react";
-import { baseUrl } from "@/utils/baseURL";
+import CarouselComponent from "@/components/home/Carousel";
+import { Inter } from "next/font/google";
+// import cardData from "../store/cardData.json";
+import { useEffect, useState } from "react";
+import { baseUrl } from "@/utils/baseUrl";
 import Head from "next/head";
+const inter = Inter({ subsets: ["latin"] });
 
-export default function Home({data}:any) {
-  const [typeFilter, setTypeFilter] = useState("");
-  const categories: any = new Set();
-  const foodData: any = [];
+export default function Home({ data }) {
+  let categories = new Set();
+  let categoryArray;
+  const [typeFilter, setTypeFilter] = useState(false);
+  const foodData = [];
   const handleData = () => {
-    data?.map((data: any) => {
+    data?.map((data) => {
       return foodData.push(data), categories.add(data.category);
     });
   };
+
   handleData();
-  const categoryArray = [...categories];
+  useEffect(() => {
+    localStorage.setItem("isAdmin", false); //added this line here to prevent anyone from accessing /admin if not logged in.
+  }, []);
+
+  categoryArray = [...categories];
 
   return (
     <>
-     <Head>
-        <title>AMJADALI</title>
+      <Head>
+        <title>PizzaWizza</title>
       </Head>
       <CarouselComponent />
       <div className="container mx-auto">
-
         <div className="my-6 space-x-5">
           <button
             className={`border-black rounded-full dark:border-white border-2 py-1 px-3 ${
               !typeFilter && "bg-slate-300 dark:bg-slate-600"
             } `}
-            onClick={() => setTypeFilter("")}
+            onClick={() => setTypeFilter(false)}
           >
             All
           </button>
@@ -71,23 +76,24 @@ export default function Home({data}:any) {
             Non Veg
           </button>
         </div>
-
         {categoryArray.map((category) => {
           return (
             <>
               <div
                 key={category}
-                className="text-4xl mt-10 mb-3 uppercase font-bold"
+                className=" text-4xl mt-10 mb-3 uppercase font-bold"
               >
                 {category}
               </div>
               <hr />
               <div className="flex flex-col items-center justify-center">
-                <div className="grid mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <div className=" grid mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                   {foodData
-                    ?.filter((foodData: any) => category === foodData.category)
-                    ?.filter((foodData: { foodType: string; }) => typeFilter?typeFilter===foodData.foodType:foodData)
-                    ?.map((data: any) => {
+                    ?.filter((foodData) => category === foodData.category)
+                    ?.filter((foodData) =>
+                      typeFilter ? typeFilter === foodData.foodType : foodData
+                    )
+                    ?.map((data) => {
                       return <Card key={data.name} foodData={data} />;
                     })}
                 </div>
@@ -108,7 +114,7 @@ export async function getStaticProps() {
       .catch((error) => error.message);
 
     data = await JSON.parse(JSON.stringify(pizzaData)); // step required during deployment in staticProps
-  } catch (error:any) {
+  } catch (error) {
     console.log(error.message);
   }
 
@@ -116,6 +122,6 @@ export async function getStaticProps() {
     props: {
       data: data.data || null,
     },
-    //revalidate: 5,
+    revalidate: 5,
   };
 }

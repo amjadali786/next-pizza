@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { createContext, useMemo, useReducer } from "react";
 
-const reducer = (state: any, action: any) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case "ADD":
       return [
@@ -13,12 +11,12 @@ const reducer = (state: any, action: any) => {
           name: action.name,
           price: action.price,
           qty: action.qty,
-          size: action.priceOptions,
+          size: action.priceOption,
           img: action.img,
         },
       ];
     case "UPDATE":
-      const arr = [...state];
+      let arr = [...state];
       arr.find((food, index) => {
         if (food.tempId === action.tempId) {
           arr[index] = {
@@ -31,12 +29,12 @@ const reducer = (state: any, action: any) => {
       return arr;
 
     case "REMOVE":
-      const newArr = [...state];
+      let newArr = [...state];
       newArr.splice(action.index, 1);
       return newArr;
 
     case "INCREMENT":
-      const incArr = [...state];
+      let incArr = [...state];
       incArr.find((food, index) => {
         if (food.tempId === action.tempId) {
           incArr[index] = {
@@ -49,7 +47,7 @@ const reducer = (state: any, action: any) => {
       return incArr;
 
     case "DECREMENT":
-      const decArr = [...state];
+      let decArr = [...state];
       decArr.find((food, index) => {
         if (food.tempId === action.tempId) {
           decArr[index] = {
@@ -62,7 +60,7 @@ const reducer = (state: any, action: any) => {
       return decArr;
 
     case "DROP":
-      const emptyArr: any = [];
+      let emptyArr = [];
       return emptyArr;
     default:
       console.log("Action type");
@@ -71,7 +69,7 @@ const reducer = (state: any, action: any) => {
 
 export const CartContext = createContext();
 
-export const CartProvider = ({ children }: any) => {
+export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, []);
   const contextValue = useMemo(() => {
     return { state, dispatch };

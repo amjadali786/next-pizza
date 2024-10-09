@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -14,7 +12,7 @@ function Orders() {
       },
       body: JSON.stringify({ email: localStorage.getItem("userEmail") }),
     }).then(async (res) => {
-      const response = await res.json();
+      let response = await res.json();
       setOrdersData(response?.order_data?.order_data);
     });
   };
@@ -25,35 +23,35 @@ function Orders() {
 
   return (
     <>
-      {ordersData?.length > 0 ? (
+      {ordersData.length > 0 ? (
         <div className="container my-4 mx-auto">
-          {ordersData?.map((orders: any) => {
+          {ordersData?.map((orders) => {
             return (
               <>
-                {orders?.map((data:any) => {
+                {orders.map((data) => {
                   return (
                     <>
-                      {data?.order_date ? (
+                      {data.order_date ? (
                         <div className="font-bold text-xl mb-2">
                           {" "}
-                          {data?.order_date} <hr />{" "}
+                          {data.order_date} <hr />{" "}
                         </div>
                       ) : (
                         <div className="my-4 w-96 border-black border-gradient p-4 dark:border-white rounded-lg">
                           <div className="relative w-full rounded-lg h-72">
                             <Image
-                              src={data?.img}
+                              src={data.img}
                               layout="fill"
                               objectFit="cover"
                               className="rounded-lg"
                               alt="pizza"
                             />
                           </div>
-                          <div className="font-bold text-xl">{data?.name}</div>
+                          <div className="font-bold text-xl">{data.name}</div>
                           <div className="flex justify-between items-center">
-                            <div>{data?.qty}</div>
-                            <div>{data?.size}</div>
-                            <div className="font-semibold">{data?.price}/-</div>
+                            <div>{data.qty}</div>
+                            <div>{data.size}</div>
+                            <div className="font-semibold">{data.price}/-</div>
                           </div>
                         </div>
                       )}

@@ -32,6 +32,7 @@ function Signup() {
       localStorage.setItem("userEmail", credentials.email);
       localStorage.setItem("isAdmin", false);
       router.push("/");
+      //logic for signup
     } else {
       alert("There is something wrong. Please try again");
     }

@@ -1,27 +1,25 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { CartContext } from "@/utils/ContextReducer";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useContext, useState } from "react";
 
-function Card(props:any) {
+function Card(props) {
   const data = props.foodData;
-  const { state, dispatch }:any = useContext(CartContext);
+  const { state, dispatch } = useContext(CartContext);
   const priceOptions = Object.keys(data.price);
   const [size, setSize] = useState(priceOptions[0]);
   const [qty, setQty] = useState(1);
 
-  const handleQty = (e:any) => {
+  const handleQty = (e) => {
     setQty(e.target.value);
   };
 
-  const handleSize = (e:any) => {
+  const handleSize = (e) => {
     setSize(e.target.value);
   };
   const handleAddToCart = async () => {
     const updateItem = await state.find(
-      (item:any) => item.tempId === data["_id"] + size
+      (item) => item.tempId === data["_id"] + size
     );
     if (!updateItem) {
       dispatch({
@@ -47,17 +45,17 @@ function Card(props:any) {
     // console.log(state);
     //
   };
-  const finalPrice = qty * parseInt(data.price[size]);
+  let finalPrice = qty * parseInt(data.price[size]);
 
   return (
     <div className="box">
       <div className="w-80 rounded-lg bg-white overflow-hidden dark:bg-black border-gradient">
-        <Link href={{ pathname: "/item/[item]" }} as={`item/${data["_id"]}`}>
+        <Link href={{ pathname: "/Item/[item]" }} as={`Item/${data["_id"]}`}>
           <div className="relative w-full h-80">
             <Image src={data.img} layout="fill" objectFit="cover" alt="pizza" />
           </div>
           <div className="p-4">
-            <div className="font-bold mb-2 text-xl uppercase"> {data.name}</div>
+            <div lassName="font-bold mb-2 text-xl uppercase"> {data.name}</div>
             <p className=" short_description text-gray-700 dark:text-gray-400 text-base">
               {data.description}
             </p>

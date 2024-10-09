@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { CartContext } from "@/utils/ContextReducer";
 import { useRouter } from "next/router";
 
 import React, { useContext, useState } from "react";
 
 function Cart() {
-  const { state, dispatch }: any = useContext(CartContext);
+  const { state, dispatch } = useContext(CartContext);
   const [errorMessage, setErrorMessage] = useState(
     "Your order was canceled 😔"
   );
@@ -14,7 +12,7 @@ function Cart() {
   const [success, setSuccess] = useState(false);
   const [fail, setFail] = useState(false);
   const handleCheckOut = async () => {
-    const userEmail = localStorage.getItem("userEmail");
+    let userEmail = localStorage.getItem("userEmail");
     console.log(localStorage.getItem("userEmail"));
     if (
       localStorage.getItem("userEmail") === null ||
@@ -22,7 +20,7 @@ function Cart() {
     ) {
       router.push("/login");
     } else {
-      await fetch("api/OrdersData", {
+      await fetch("api/ordersData", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,18 +43,18 @@ function Cart() {
       });
     }
   };
-  const totalPrice = state.reduce((total: any, food: any) => total + food.price, 0);
+  let totalPrice = state.reduce((total, food) => total + food.price, 0);
   return (
     <>
       {success && (
         <div
-          className="bg-teal-100 border-t-4 max-w-sm mx-auto flex justify-self-center border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+          class="bg-teal-100 border-t-4 max-w-sm mx-auto flex justify-self-center border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
           role="alert"
         >
           <div className="flex">
-            <div className="py-1">
+            <div class="py-1">
               <svg
-                className="fill-current h-6 w-6 text-teal-500 mr-4"
+                class="fill-current h-6 w-6 text-teal-500 mr-4"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
               >
@@ -65,19 +63,19 @@ function Cart() {
             </div>
             <div className="flex flex-row justify-between">
               <div>
-                <p className="font-bold">Wohooo !</p>
-                <p className="text-sm">Your Order has been accepted 😋</p>
+                <p class="font-bold">Wohooo !</p>
+                <p class="text-sm">Your Order has been accepted 😋</p>
               </div>
               <button
                 type="button"
-                className="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
+                class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
                 data-dismiss-target="#alert-3"
                 aria-label="Close"
                 onClick={() => setSuccess(false)}
               >
-                <span className="sr-only">Close</span>
+                <span class="sr-only">Close</span>
                 <svg
-                  className="w-3 h-3"
+                  class="w-3 h-3"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -102,9 +100,9 @@ function Cart() {
           role="alert"
         >
           <div className="flex">
-            <div className="py-1">
+            <div class="py-1">
               <svg
-                className="fill-current h-6 w-6 text-red-500 mr-4"
+                class="fill-current h-6 w-6 text-red-500 mr-4"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
               >
@@ -113,19 +111,19 @@ function Cart() {
             </div>
             <div className="flex flex-row justify-between">
               <div>
-                <p className="font-bold">Holy smokes !!</p>
-                <p className="text-sm">{errorMessage}</p>
+                <p class="font-bold">Holy smokes !!</p>
+                <p class="text-sm">{errorMessage}</p>
               </div>
               <button
                 type="button"
-                className="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
+                class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
                 data-dismiss-target="#alert-3"
                 aria-label="Close"
                 onClick={() => setFail(false)}
               >
-                <span className="sr-only">Close</span>
+                <span class="sr-only">Close</span>
                 <svg
-                  className="w-3 h-3"
+                  class="w-3 h-3"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -145,19 +143,19 @@ function Cart() {
         </div>
       )}
       <div style={{ minHeight: "95vh" }} className="flex items-center ">
-        <div className="container mx-auto flex border-gradient p-3 pb-10 m-10  rounded-lg flex-col">
-          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-              <div className="overflow-hidden">
+        <div class="container mx-auto flex border-gradient p-3 pb-10 m-10  rounded-lg flex-col">
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+              <div class="overflow-hidden">
                 {state.length > 0 ? (
                   <>
-                    <table className="min-w-full text-left text-lg font-light">
-                      <thead className="border-b font-medium dark:border-neutral-500">
+                    <table class="min-w-full text-left text-lg font-light">
+                      <thead class="border-b font-medium dark:border-neutral-500">
                         <tr>
-                          <th scope="col" className="px-6 py-4 ">
+                          <th scope="col" class="px-6 py-4 ">
                             #
                           </th>
-                          <th scope="col" className="px-6 py-4 ">
+                          <th scope="col" class="px-6 py-4 ">
                             <div className="flex items-center">
                               Item name
                               <svg
@@ -176,7 +174,7 @@ function Cart() {
                               </svg>
                             </div>
                           </th>
-                          <th scope="col" className="px-6 py-4 ">
+                          <th scope="col" class="px-6 py-4 ">
                             <div className="flex items-center">
                               Size
                               <svg
@@ -185,7 +183,7 @@ function Cart() {
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
                                 stroke="currentColor"
-                                className="w-6 h-6 mx-1"
+                                class="w-6 h-6 mx-1"
                               >
                                 <path
                                   stroke-linecap="round"
@@ -195,7 +193,7 @@ function Cart() {
                               </svg>
                             </div>
                           </th>
-                          <th scope="col" className="px-6 py-4 ">
+                          <th scope="col" class="px-6 py-4 ">
                             <div className="flex items-center">
                               Quantity
                               <svg
@@ -214,7 +212,7 @@ function Cart() {
                               </svg>
                             </div>
                           </th>
-                          <th scope="col" className="px-6 py-4  ">
+                          <th scope="col" class="px-6 py-4  ">
                             <div className="flex items-center">
                               Price
                               <svg
@@ -233,26 +231,26 @@ function Cart() {
                               </svg>
                             </div>
                           </th>
-                          <th scope="col" className="px-6 py-4 "></th>
+                          <th scope="col" class="px-6 py-4 "></th>
                         </tr>
                       </thead>
                       <tbody>
-                        {state.map((data: any, index: any) => {
+                        {state.map((data, index) => {
                           return (
                             <tr
                               key={index}
-                              className="border-b dark:border-neutral-500"
+                              class="border-b dark:border-neutral-500"
                             >
-                              <td className="whitespace-nowrap px-6 py-4 font-medium">
+                              <td class="whitespace-nowrap px-6 py-4 font-medium">
                                 {index + 1}
                               </td>
-                              <td className="whitespace-nowrap px-6 py-4">
+                              <td class="whitespace-nowrap px-6 py-4">
                                 {data.name}
                               </td>
-                              <td className="whitespace-nowrap px-6 py-4">
+                              <td class="whitespace-nowrap px-6 py-4">
                                 {data.size}
                               </td>
-                              <td className="whitespace-nowrap  px-6 py-4">
+                              <td class="whitespace-nowrap  px-6 py-4">
                                 <div className="  flex flex-row  ">
                                   <svg
                                     onClick={() => {
@@ -307,7 +305,7 @@ function Cart() {
                                   </svg>
                                 </div>
                               </td>
-                              <td className="whitespace-nowrap px-6 py-4">
+                              <td class="whitespace-nowrap px-6 py-4">
                                 ₹{data.price}/-
                               </td>
                               {/* delete option */}
@@ -315,7 +313,7 @@ function Cart() {
                                 onClick={() =>
                                   dispatch({ type: "REMOVE", index: index })
                                 }
-                                className="cursor-pointer whitespace-nowrap px-2 py-2 hover:text-red-500"
+                                class="cursor-pointer whitespace-nowrap px-2 py-2 hover:text-red-500"
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"

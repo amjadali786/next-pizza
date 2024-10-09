@@ -1,18 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import Users from "@/models/Users";
 import db from "@/utils/db";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-// const jwtSecret = process.env.JWT_SECRET;
-const jwtSecret = '$%ADDFSAFDSFAFA?.'
-export default async function handler(req:any, res: any) {
+const jwtSecret = process.env.JWT_SECRET;
+export default async function handler(req, res) {
   let success = false;
   const salt = await bcrypt.genSalt(10);
-    //console.log('salt ==', salt)
-  const securePass = await bcrypt.hash(req.body.password, salt);
-  //console.log('securePass == ', securePass)
+
+  let securePass = await bcrypt.hash(req.body.password, salt);
 
   if (req.method === "POST") {
     await db.connect();
@@ -37,7 +33,7 @@ export default async function handler(req:any, res: any) {
         .catch((err) => {
           res.json({ error: err.message });
         });
-    } catch (error: any) {
+    } catch (error) {
       console.log(error.message);
     }
   }
